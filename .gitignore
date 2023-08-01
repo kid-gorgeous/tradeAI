@@ -9,10 +9,10 @@
 /vid-to-text.py
 
 # directories
-/symbols/
-/notebooks/
+symbols/
+notebooks/
 utils/
 
 # ignore
 .DS_Store
-/__pycache__/
+__pycache__/
