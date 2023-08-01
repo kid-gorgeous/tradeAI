@@ -30,10 +30,25 @@ class Menu:
             for row in reader:
                 print(', '.join(row))
 
+    def getSymbols(self):
+        pass
+
+    def getScreen(self):
+        pass
+    
+    def getSentimentAnalysis(self):
+        pass
+
+    def getRiskAnalysis(self):
+        pass
+
+
     # From here I want to grab the Head of the stack of the CSV file and display it
     #   or to prepare the information to be displayed in a JSON format in order to send and receive
     #   data from the "server".
     
+
+# Only spits out a cvs dataframe BUT the query works
 while True:
     inp = input("\nEnter a symbol: ")
     menu = Menu(inp)

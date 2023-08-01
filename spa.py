@@ -24,6 +24,7 @@ def user_input_features():
 symbol, start, end = user_input_features()
 
 
+# and broken function... will fix later... hueheu
 # potentially overload this function to search csv instead??
 def get_symbol(symbol):
     # questionable url

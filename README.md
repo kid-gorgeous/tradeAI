@@ -3,16 +3,16 @@
 This simple command line call back tool will help with using GPT from the command line directly from the working directory. 
 By using ```--comp, --code, --img``` and other hidden features the user may generate text, code, and image callbacks.
 
-##### Features:
+## Features:
     - Symbol Screener (S&P500 index, ~500 symbols: 30% of best performers) 
     - Sentiment Analysizer (Mean Sentiment, and Conformal information)
     - (WIP) Voice Transcriber...? (whisper openai)
     - (WIP) Full-Stack Application features.... (Flask???, Streamlit???)
 
-##### Usage
+## Usage
 
 
-##### In addition to the CLI interface 
+### In addition to the CLI interface 
 
 In addition to the CLI interface, I will be working to provide a LTM module on top of the OpenAI provide API. I will be researching more embedding techniques, improving the toknizer, parser, and working towards generally improving the LLM model.. but general optimizion, fine tuning and expanding the dimensionality of this application has become a key goal of mine. For my convenience I've intentionally built onto a AI framework. Currently Im working on allocating space, and gather data for my experiments. Consequently, I've taken this upon myself, and has become work in itself.
 
