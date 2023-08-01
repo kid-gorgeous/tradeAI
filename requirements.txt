@@ -1,0 +1,6 @@
+yahoo_fin
+yfinance
+pandas
+bs4
+nltk
+pandas_datareader

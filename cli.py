@@ -1,10 +1,10 @@
 from api import OpenAIClient, openai
-from ltm import LongTermMemoryModel
+# from ltm import LongTermMemoryModel
 from termcolor import colored
 
 # --------------------------------------------------------------------------------- #
 ai = OpenAIClient()
-db = LongTermMemoryModel()
+# db = LongTermMemoryModel()
 
 import sys
 
@@ -44,7 +44,7 @@ if __name__ == "__main__":
                 )
                 completion = response['choices'][0]['text']
                 print(colored(completion, 'green'))
-                db.add_completion(prompt, completion)
+                # db.add_completion(prompt, completion)
             print("\nEnter prompt or type 'exit' to exit")
 
         

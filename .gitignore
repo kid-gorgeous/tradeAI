@@ -1,4 +1,17 @@
+# files
 /database.md
+/database.db
 /attn.py
+/api.py
+/ltm.py
 /api.txt
+/cli.py
+/vid-to-text.py
+
+# directories
+/symbols
+/notebooks
+
+# ignore
 .DS_Store
+/__pycache__
