@@ -7,7 +7,7 @@ import sys
 
 class OpenAIClient:
     def __init__(self):
-        self.api_key = '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'
+        self.api_key = ''
         self.max_tokens = 1000
         self.temperature = 0.5
         
