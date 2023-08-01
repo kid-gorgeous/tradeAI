@@ -9,8 +9,8 @@
 /vid-to-text.py
 
 # directories
-./symbols
-./notebooks
+symbols
+notebooks
 
 # ignore
 .DS_Store
