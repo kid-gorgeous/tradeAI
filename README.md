@@ -19,7 +19,7 @@
 
 #### Usage and TODOs:
     - Improving on overall modility of the application. 
-        - Most python files are not encapsulated yet, and are still under development. 
+    - Most python files are not encapsulated yet
     - The menu, and overall functionality of the application needs to be reanalysized on ease of use
     - The front end of the application needs work
     - Requirements must be documented
