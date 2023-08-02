@@ -8,12 +8,12 @@
 
 #### Usage and TODOs:
     - Improving on overall modility of the application. Most python files are not encapsulated yet, and are still underdevelopment. 
-    - The front end of the application needs work, and styling. The graphs need a new way of reanimation.
-    - The menu, and overall functionality of the application needs to be analysized on eou
-    - Modules must be named, and updated
-    - Configurations must be written
+    - The menu, and overall functionality of the application needs to be reanalysized on ease of use
+    - The front end of the application needs work
     - Requirements must be documented
-    - Reincorperate an OpenAI wrapper for better queries and prediction models
+    - Configurations must be written
+    - Modules must be named, and updated
+    - Reincorperating an OpenAI wrapper for better queries and prediction models
 
 ---
 ### In addition to the CLI interface 
@@ -24,6 +24,21 @@ Information like sentiment scores, news, risk, and popularity are gathered, and 
 
 Further features will allow for better data scrapping methods, and will allow the user to browse the internet will chatting with the Bot about the current symbol, new, or query that the user is looking for while also learning more about the user themselves and gathering data itself. 
 
+### On the horizon
+
+Even though this system is designed to allow the user to view and maintain a large
+field of information on all of the symbols provided by the S&P500, it will not act 
+on its own free will and execute trades. It will allow the user to gather, and view data at their free will. The machine learning that is build into these modules
+allow the user to running a variety of learning methods application to follow. 
+
+For my own personal benifit and for the sake of research intend to employed an indication system, and a personalize Autonomous trading system that will help leverage risk and value in real time in the case of unique market conditions.
+
+It will agregate information from a variety of sources like youtube, twitter(maybe), yahoo finance, and other places that will provide value data, and information that can be scrubbed and prepared for finetuned training models.
+
+It would be nice to provide a system that will help the user trade on the NYSE based on the information provide by the S&P500, but such is the case of a lack of
+trustworthy ways to access brokrage accounts... Alas, it is on the TODO list.
+
+Further information will be provided. Stay tuned!
 
 ---
 ##### MIT License
