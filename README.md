@@ -9,7 +9,14 @@ By using ```--comp, --code, --img``` and other hidden features the user may gene
     - (WIP) Voice Transcriber...? (whisper openai)
     - (WIP) Full-Stack Application features.... (Flask???, Streamlit???)
 
-## Usage
+## Usage and TODOs:
+    - Improving on overall modility of the application. Most python files are not encapsulated yet, and are still underdevelopment. 
+    - The front end of the application needs work, and styling. The graphs need a new way of reanimation.
+    - The menu, and overall functionality of the application needs to be analysized on eou
+    - Modules must be named, and updated
+    - Configurations must be written
+    - Requirements must be documented
+    
 
 
 ### In addition to the CLI interface 
