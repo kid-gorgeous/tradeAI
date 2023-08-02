@@ -17,3 +17,5 @@ utils/
 # ignore
 .DS_Store
 *.pyc
+*.ipynb
+*.mp4
