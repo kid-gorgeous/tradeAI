@@ -39,9 +39,6 @@ Information like sentiment scores, news, risk, and popularity are gathered, and 
 
 Further features will allow for better data scrapping methods, and will allow the user to browse the internet will chatting with the Bot about the current symbol, new, or query that the user is looking for while also learning more about the user themselves and gathering data itself. 
 
-<br></br>
-
----
 ### On the horizon
 
 Even though this system is designed to allow the user to view and maintain a large
