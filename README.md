@@ -15,7 +15,8 @@
     - Requirements must be documented
     - Reincorperate an OpenAI wrapper for better queries and prediction models
 
-#### In addition to the CLI interface 
+---
+### In addition to the CLI interface 
 
 In addition to the CLI interface, and menu systems, I will be working to provide a LTM module on top of the OpenAI provide API. For my convenience I've intentionally built onto a AI framework. Currently Im working on gathering data for my experiments. Consequently, I've taken this upon myself, and has become work in itself. Luckily I am gather market information with a baked in REST API.
 
