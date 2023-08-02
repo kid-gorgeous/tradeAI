@@ -15,7 +15,7 @@
     - Requirements must be documented
     - Reincorperate an OpenAI wrapper for better queries and prediction models
 
-### In addition to the CLI interface 
+#### In addition to the CLI interface 
 
 In addition to the CLI interface, and menu systems, I will be working to provide a LTM module on top of the OpenAI provide API. For my convenience I've intentionally built onto a AI framework. Currently Im working on gathering data for my experiments. Consequently, I've taken this upon myself, and has become work in itself. Luckily I am gather market information with a baked in REST API.
 
@@ -25,7 +25,7 @@ Further features will allow for better data scrapping methods, and will allow th
 
 
 ---
-#### MIT License
+##### MIT License
 Copywrite 2023, Evan Julius
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
