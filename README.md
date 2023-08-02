@@ -1,7 +1,4 @@
-#### GPT CLI and or Future OpenAI attention API
-
-This simple command line call back tool will help with using GPT from the command line directly from the working directory. 
-By using ```--comp, --code, --img``` and other hidden features the user may generate text, code, and image callbacks.
+# TradeAI - ChatGPT, and Machine Learning enhanced Portfolio Management System
 
 ## Features:
     - Symbol Screener (S&P500 index, ~500 symbols: 30% of best performers) 

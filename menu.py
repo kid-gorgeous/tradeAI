@@ -17,14 +17,6 @@ import termcolor
 from risk_mgmt import RiskAnalysis, printInfo
 from sentiment_analysis import SA, News
 
-# Working
-def openfile(inp):
-    filename = inp
-    with open(f'symbols/{filename}.csv', newline='') as csvfile:
-        reader = csv.reader(csvfile, delimiter=' ', quotechar='|')
-        for row in reader:
-            print(', '.join(row))
-
 class Menu:
     # Simply name the file to search
     def __init__(self, filename):
@@ -95,7 +87,7 @@ class Menu:
         risk_analysis.plotGraph(drawdown, symbol)
         pass
 
-# Only spits out a cvs dataframe BUT the query works
+
 while True:
     inp = input("\nEnter a symbol: ")
     menu = Menu(inp.upper())    
