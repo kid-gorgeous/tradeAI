@@ -12,19 +12,19 @@
     - spa.py will become a single page application to view information and to visualize data
 
 #### Setup:
-Add your OpenAI API key if so desired:
-```
-    pip3 install -r requirements.txt'
-```
-Update the API key in the api.py file
-Alias repl to engage with OpenAI
-```bash
-    alias repl='cd /Users/user/ai && python3 cli.py --repl'
-```
-Run the menu
-```bash 
-    python3 menu.py
-```
+    - Add your OpenAI API key if so desired:
+    ```
+        pip3 install -r requirements.txt
+    ```
+    Update the API key in the api.py file
+    Alias repl to engage with OpenAI
+    ```bash
+        alias repl='cd /Users/user/ai && python3 cli.py --repl'
+    ```
+    Run the menu
+    ```bash 
+        python3 menu.py
+    ```
 
 #### Features:
     - Symbol Screener (S&P500 index, ~500 symbols: 30% of best performers) 
