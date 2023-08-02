@@ -1,4 +1,4 @@
-# TradeAI - ChatGPT, and Machine Learning enhanced Portfolio Management System
+### TradeAI - ChatGPT, and Machine Learning enhanced Portfolio Management System
 
 ## Features:
     - Symbol Screener (S&P500 index, ~500 symbols: 30% of best performers) 
