@@ -1,6 +1,6 @@
 ### TradeAI - ChatGPT, and Machine Learning enhanced Portfolio Management System
 
-> *Trade like you've never traded before*
+> *Trade like you've never traded before ... misrepresent, and under-educated* - Me.. 
 
 #### File information:
     - api.py will provide the user access to the OpenAI API
@@ -14,8 +14,10 @@
 #### Features:
     - Symbol Screener (S&P500 index, ~500 symbols: 30% of best performers) 
     - Sentiment Analysizer (Mean Sentiment, and Conformal information)
-    - (WIP) Voice Transcriber...? (whisper openai)
+    - Risk Analysizer (The daredevils tool belt)
+    - (WIP) Voice Transcriber...? (whisper openai or something)
     - (WIP) Full-Stack Application features.... (Flask???, Streamlit???)
+    - (WIP) CLI, and REST API system
 
 #### Usage and TODOs:
     - Improving on overall modility of the application. 
