@@ -12,24 +12,13 @@
     - spa.py will become a single page application to view information and to visualize data
 
 #### Setup:
-1. Add your OpenAI API key if so desired
-2. Install the requirements
-```bash
-    pip3 install -r requirements.txt
-```
-3. Update the API key in the api.py file
-4. Alias repl to engage with OpenAI
-```bash
-    alias repl='cd /Users/user/ai && python3 cli.py --repl'
-```
-5. Run the menu
-```bash 
-    python3 menu.py
-```
-6. Converse with ChatGPT 3.5
-```bash
-    repl
-```
+    - Add your OpenAI API key if so desired
+    - Install the requirements
+    - Update the API key in the api.py file
+    - Alias repl to engage with OpenAI
+    - Converse with ChatGPT 3.5
+    - Run/Modify menu.py for TA tasks
+
 
 #### Features:
     - Symbol Screener (S&P500 index, ~500 symbols: 30% of best performers) 
@@ -37,7 +26,7 @@
     - Risk Analysizer (The daredevils tool belt)
     - (WIP) Voice Transcriber...? (whisper openai or something)
     - (WIP) Full-Stack Application features.... (Flask???, Streamlit???)
-    - (WIP) CLI, and REST API system
+    - (WIP) CLI, and REST API interface (fastapi???, click???, sys.argv???)
 
 #### Usage and TODOs:
     - Improving on overall modility of the application. 
