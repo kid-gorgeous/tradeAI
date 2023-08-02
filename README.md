@@ -7,7 +7,7 @@
     - cli.py will grant them the ability to chat via command line arguements
     - menu.py will display *most* of the infromation provided
     - risk_mgmt.py provides risk information on the portfolio
-    - screener.py provides measured market data, and downloads it for later (but you need to create the symbol directory *i still have my tricks*) 
+    - screener.py provides measured market data, and downloads it for later
     - sentiment_analysis.py provides a measured evaluation of the value of that daily market news
     - spa.py will become a single page application to view information and to visualize data
 
