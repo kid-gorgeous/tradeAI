@@ -2,6 +2,15 @@
 
 > *Trade like you've never traded before*
 
+#### File information:
+    - api.py will provide the user access to the OpenAI API
+    - cli.py will grant them the ability to chat via command line arguements
+    - menu.py will display *most* of the infromation provided
+    - risk_mgmt.py provides risk information on the portfolio
+    - screener.py provides measured market data, and downloads it for later (but you need to create the symbol directory *i still have my tricks*) 
+    - sentiment_analysis.py provides a measured evaluation of the value of that daily market news
+    - spa.py will become a single page application to view information and to visualize data
+
 #### Features:
     - Symbol Screener (S&P500 index, ~500 symbols: 30% of best performers) 
     - Sentiment Analysizer (Mean Sentiment, and Conformal information)
@@ -9,7 +18,7 @@
     - (WIP) Full-Stack Application features.... (Flask???, Streamlit???)
 
 #### Usage and TODOs:
-    - Improving on overall modility of the application. Most python files are not encapsulated yet, and are still underdevelopment. 
+    - Improving on overall modility of the application. Most python files are not encapsulated yet, and are still under development. 
     - The menu, and overall functionality of the application needs to be reanalysized on ease of use
     - The front end of the application needs work
     - Requirements must be documented
