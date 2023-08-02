@@ -28,12 +28,11 @@ Further features will allow for better data scrapping methods, and will allow th
 
 Even though this system is designed to allow the user to view and maintain a large
 field of information on all of the symbols provided by the S&P500, it will not act 
-on its own free will and execute trades. It will allow the user to gather, and view data at their free will. The machine learning that is build into these modules
-allow the user to running a variety of learning methods application to follow. 
+on its own free will and execute trades. It will allow the user to gather, and view data at their free will. The machine learning capabilites that are build into these modules will allow the user to run a variety of different methods of applications to follow. Documentation is a work in progress but will be updated to provide a indepth explaination of these features
 
-For my own personal benifit and for the sake of research intend to employed an indication system, and a personalize Autonomous trading system that will help leverage risk and value in real time in the case of unique market conditions.
+For my own personal benifit and for the sake of research intend to employed an indication system, and a personalize autonomous trading system that will help leverage risk and value in real time in the case of unique market conditions.
 
-It will agregate information from a variety of sources like youtube, twitter(maybe), yahoo finance, and other places that will provide value data, and information that can be scrubbed and prepared for finetuned training models.
+It will aggregate information from a variety of sources like youtube, twitter(maybe), yahoo finance, and other places that will provide valuable data, and information that can be scrubbed and prepared to align training models.
 
 It would be nice to provide a system that will help the user trade on the NYSE based on the information provide by the S&P500, but such is the case of a lack of
 trustworthy ways to access brokrage accounts... Alas, it is on the TODO list.
