@@ -1,12 +1,12 @@
 ### TradeAI - ChatGPT, and Machine Learning enhanced Portfolio Management System
 
-## Features:
+#### Features:
     - Symbol Screener (S&P500 index, ~500 symbols: 30% of best performers) 
     - Sentiment Analysizer (Mean Sentiment, and Conformal information)
     - (WIP) Voice Transcriber...? (whisper openai)
     - (WIP) Full-Stack Application features.... (Flask???, Streamlit???)
 
-## Usage and TODOs:
+#### Usage and TODOs:
     - Improving on overall modility of the application. Most python files are not encapsulated yet, and are still underdevelopment. 
     - The front end of the application needs work, and styling. The graphs need a new way of reanimation.
     - The menu, and overall functionality of the application needs to be analysized on eou
