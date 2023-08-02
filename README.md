@@ -13,15 +13,21 @@
     - Modules must be named, and updated
     - Configurations must be written
     - Requirements must be documented
-    
+     
 
 
 ### In addition to the CLI interface 
 
-In addition to the CLI interface, I will be working to provide a LTM module on top of the OpenAI provide API. I will be researching more embedding techniques, improving the toknizer, parser, and working towards generally improving the LLM model.. but general optimizion, fine tuning and expanding the dimensionality of this application has become a key goal of mine. For my convenience I've intentionally built onto a AI framework. Currently Im working on allocating space, and gather data for my experiments. Consequently, I've taken this upon myself, and has become work in itself.
+In addition to the CLI interface, and menu systems, I will be working to provide a LTM module on top of the OpenAI provide API. For my convenience I've intentionally built onto a AI framework. Currently Im working on gathering data for my experiments. Consequently, I've taken this upon myself, and has become work in itself. Luckily I am gather market information with a baked in REST API.
 
+Information like sentiment scores, news, risk, and popularity are gathered, and measured before being transformed into an OpenAI embedding. Once an embedding is created its is used to finetune a customized OpenAI chat model that will allow the user to converse with the trading information provided. 
 
-##### MIT License
+Further features will allow for better data scrapping methods, and will allow the user to browse the internet will chatting with the Bot about the current symbol, new, or query that the user is looking for while also learning more about the user themselves and gathering data itself. 
+
+<br></br>
+---
+
+#### MIT License
 Copywrite 2023, Evan Julius
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
