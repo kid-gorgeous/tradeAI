@@ -21,98 +21,261 @@ from nltk.sentiment.vader import SentimentIntensityAnalyzer
 import nltk
 nltk.download('vader_lexicon')
 
-# Parameters 
-n = 3 #the # of article headlines displayed per ticker
-tickers = ['AAPL', 'TSLA', 'AMZN']
+class News:
+    def __init__(self, symbol, tickers):
+        self.n = 3
+        self.symbol = symbol
+        self.tickers = tickers
 
-# Get Data
-finwiz_url = 'https://finviz.com/quote.ashx?t='
-news_tables = {}
+    def getNews(self):
+        n = self.n
 
-for ticker in tickers:
-    url = finwiz_url + ticker
-    req = Request(url=url,headers={'User-Agent': 'Mozilla/5.0'}) 
-    resp = urlopen(req)    
-    html = BeautifulSoup(resp, features="lxml")
-    news_table = html.find(id='news-table')
-    news_tables[ticker] = news_table
+        finwiz_url = 'https://finviz.com/quote.ashx?t='
+        news_tables = {}
 
-try:
-    for ticker in tickers:
-        df = news_tables[ticker]
-        df_tr = df.findAll('tr')
-    
-        print ('\n')
-        print ('Recent News Headlines for {}: '.format(ticker))
-        
-        for i, table_row in enumerate(df_tr):
-            a_text = table_row.a.text
-            td_text = table_row.td.text
-            td_text = td_text.strip()
-            print(a_text,'(',td_text,')')
-            if i == n-1:
-                break
-except KeyError:
-    pass
+        for ticker in self.tickers:
+            url = finwiz_url + ticker
+            req = Request(url=url,headers={'User-Agent': 'Mozilla/5.0'}) 
+            resp = urlopen(req)    
+            html = BeautifulSoup(resp, features="lxml")
+            news_table = html.find(id='news-table')
+            news_tables[ticker] = news_table
 
-
-# Iterate through the news
-parsed_news = []
-count = 0
-for file_name, news_table in news_tables.items():
-    # for all the table rows in a news table
-    for x in news_table.findAll('tr'):
         try:
-            text = x.a.text
-            date_scrape = x.td.text.split()
+            for ticker in self.tickers:
+                df = news_tables[ticker]
+                df_tr = df.findAll('tr')
+            
+                print ('\n')
+                print ('Recent News Headlines for {}: \n'.format(ticker))
+                
+                for i, table_row in enumerate(df_tr):
+                    a_text = table_row.a.text
+                    td_text = table_row.td.text
+                    td_text = td_text.strip()
+                    print('- ',a_text,'(',td_text,')')
+                    if i == n-1:
+                        break
+        except KeyError:
+            pass
+
+        print('\n')
+
+class SA:
+    def __init__(self, symbol, tickers):
+        self.n = 3
+        self.symbol = symbol
+        self.tickers = tickers
+
+        
+    def getNewsTables(self):
+        finwiz_url = 'https://finviz.com/quote.ashx?t='
+        news_tables = {}
+
+        for ticker in self.tickers:
+            url = finwiz_url + ticker
+            req = Request(url=url,headers={'User-Agent': 'Mozilla/5.0'}) 
+            resp = urlopen(req)    
+            html = BeautifulSoup(resp, features="lxml")
+            news_table = html.find(id='news-table')
+            news_tables[ticker] = news_table
+
+        return news_tables
+
+    def getData(self):
+        n = self.n
+        symbol = self.symbol
+
+        finwiz_url = 'https://finviz.com/quote.ashx?t='
+        news_tables = {}
+
+        for ticker in self.tickers:
+            url = finwiz_url + ticker
+            req = Request(url=url,headers={'User-Agent': 'Mozilla/5.0'}) 
+            resp = urlopen(req)    
+            html = BeautifulSoup(resp, features="lxml")
+            news_table = html.find(id='news-table')
+            news_tables[ticker] = news_table
+
+        try:
+            for ticker in self.tickers:
+                df = news_tables[ticker]
+                df_tr = df.findAll('tr')
+            
+                print ('\n')
+                print ('Recent News Headlines for {}: '.format(ticker))
+                
+                for i, table_row in enumerate(df_tr):
+                    a_text = table_row.a.text
+                    td_text = table_row.td.text
+                    td_text = td_text.strip()
+                    print(a_text,'(',td_text,')')
+                    if i == n-1:
+                        break
+        except KeyError:
+            pass
+
+        print('\n')
+
+    def parseData(self):
+        news_tables = self.getNewsTables()
+        try:
+            parsed_news = []
+            count = 0
+            for file_name, news_table in news_tables.items():
+                # for all the table rows in a news table
+                for x in news_table.findAll('tr'):
+                    try:
+                        text = x.a.text
+                        date_scrape = x.td.text.split()
+                    except:
+                        pass
+
+                    if len(date_scrape) == 1:
+                        time = date_scrape[0]
+                        
+                    else:
+                        date = date_scrape[0]
+                        time = date_scrape[1]
+
+                    ticker = file_name.split('_')[0]
+                    parsed_news.append([ticker, date, time, text])
         except:
             pass
 
-        if len(date_scrape) == 1:
-            time = date_scrape[0]
+        return parsed_news
+
+    def sentimentAnalysis(self):
+        symbol = self.symbol
+
+        parsed_news = self.parseData()
+        analyzer = SentimentIntensityAnalyzer()
+        columns = ['Ticker', 'Date', 'Time', 'Headline']
+        news = pd.DataFrame(parsed_news, columns=columns)
+        scores = news['Headline'].apply(analyzer.polarity_scores).tolist()
+
+        df_scores = pd.DataFrame(scores)
+        news = news.join(df_scores, rsuffix='_right')
+
+        news['Date'] = pd.to_datetime(news.Date).dt.date
+        unique_ticker = news['Ticker'].unique().tolist()
+        news_dict = {name: news.loc[news['Ticker'] == name] for name in unique_ticker}
+
+        values = []
+        for ticker in self.tickers: 
+            dataframe = news_dict[ticker]
+            dataframe = dataframe.set_index('Ticker')
+            dataframe = dataframe.drop(columns = ['Headline'])
+            print ('\n')
+            print (dataframe.head())
             
-        else:
-            date = date_scrape[0]
-            time = date_scrape[1]
+            inb = input("\nPress Enter to continue... (List of Sentiment Values)") 
+            mean = round(dataframe['compound'].mean(), 2)
+            values.append(mean)
 
-        ticker = file_name.split('_')[0]
-        parsed_news.append([ticker, date, time, text])
+        df = pd.DataFrame(list(zip(self.tickers, values)), columns =['Ticker', 'Mean Sentiment']) 
+        df = df.set_index('Ticker')
+        df = df.sort_values('Mean Sentiment', ascending=False)
+        print ('\n')
+        print (df)
 
+def main():
+    n = 3 #the # of article headlines displayed per ticker
+    tickers = ['AAPL', 'TSLA', 'AMZN']
+    symbol = 'AAPL'
 
-inb = input("\nPress Enter to continue...(Sentiment Analysis)")  
+    sa = SA(n,symbol,tickers)
+    sa.sentimentAnalysis()
+    
+if __name__ == "__main__":
+    # main()
+
+    # Get Data
+    # finwiz_url = 'https://finviz.com/quote.ashx?t='
+    # news_tables = {}
+
+    # for ticker in tickers:
+    #     url = finwiz_url + ticker
+    #     req = Request(url=url,headers={'User-Agent': 'Mozilla/5.0'}) 
+    #     resp = urlopen(req)    
+    #     html = BeautifulSoup(resp, features="lxml")
+    #     news_table = html.find(id='news-table')
+    #     news_tables[ticker] = news_table
+
+    # try:
+    #     for ticker in tickers:
+    #         df = news_tables[ticker]
+    #         df_tr = df.findAll('tr')
         
-# Sentiment Analysis
-analyzer = SentimentIntensityAnalyzer()
-columns = ['Ticker', 'Date', 'Time', 'Headline']
-news = pd.DataFrame(parsed_news, columns=columns)
-scores = news['Headline'].apply(analyzer.polarity_scores).tolist()
+    #         print ('\n')
+    #         print ('Recent News Headlines for {}: '.format(ticker))
+            
+    #         for i, table_row in enumerate(df_tr):
+    #             a_text = table_row.a.text
+    #             td_text = table_row.td.text
+    #             td_text = td_text.strip()
+    #             print(a_text,'(',td_text,')')
+    #             if i == n-1:
+    #                 break
+    # except KeyError:
+    #     pass
 
-df_scores = pd.DataFrame(scores)
-news = news.join(df_scores, rsuffix='_right')
+    # Iterate through the news
+    # parsed_news = []
+    # count = 0
+    # for file_name, news_table in news_tables.items():
+    #     # for all the table rows in a news table
+    #     for x in news_table.findAll('tr'):
+    #         try:
+    #             text = x.a.text
+    #             date_scrape = x.td.text.split()
+    #         except:
+    #             pass
 
+    #         if len(date_scrape) == 1:
+    #             time = date_scrape[0]
+                
+    #         else:
+    #             date = date_scrape[0]
+    #             time = date_scrape[1]
 
-# View Data 
-news['Date'] = pd.to_datetime(news.Date).dt.date
+    #         ticker = file_name.split('_')[0]
+    #         parsed_news.append([ticker, date, time, text])
 
-unique_ticker = news['Ticker'].unique().tolist()
-news_dict = {name: news.loc[news['Ticker'] == name] for name in unique_ticker}
+    # inb = input("\nPress Enter to continue...(Sentiment Analysis)")  
+    # sa = SA(3, ['AAPL', 'TSLA', 'AMZN'])
+    # parsed_news = sa.parseData()
+            
+    # # Sentiment Analysis
+    # analyzer = SentimentIntensityAnalyzer()
+    # columns = ['Ticker', 'Date', 'Time', 'Headline']
+    # news = pd.DataFrame(parsed_news, columns=columns)
+    # scores = news['Headline'].apply(analyzer.polarity_scores).tolist()
 
-values = []
-for ticker in tickers: 
-    dataframe = news_dict[ticker]
-    dataframe = dataframe.set_index('Ticker')
-    dataframe = dataframe.drop(columns = ['Headline'])
-    print ('\n')
-    print (dataframe.head())
-    
-    inb = input("\nPress Enter to continue... (List of Sentiment Values)") 
-    mean = round(dataframe['compound'].mean(), 2)
-    values.append(mean)
-    
+    # df_scores = pd.DataFrame(scores)
+    # news = news.join(df_scores, rsuffix='_right')
 
+    # View Data 
+    # news['Date'] = pd.to_datetime(news.Date).dt.date
 
-df = pd.DataFrame(list(zip(tickers, values)), columns =['Ticker', 'Mean Sentiment']) 
-df = df.set_index('Ticker')
-df = df.sort_values('Mean Sentiment', ascending=False)
-print ('\n')
-print (df)
+    # unique_ticker = news['Ticker'].unique().tolist()
+    # news_dict = {name: news.loc[news['Ticker'] == name] for name in unique_ticker}
+
+    # values = []
+    # for ticker in sa.tickers: 
+    #     dataframe = news_dict[ticker]
+    #     dataframe = dataframe.set_index('Ticker')
+    #     dataframe = dataframe.drop(columns = ['Headline'])
+    #     print ('\n')
+    #     print (dataframe.head())
+        
+    #     inb = input("\nPress Enter to continue... (List of Sentiment Values)") 
+    #     mean = round(dataframe['compound'].mean(), 2)
+    #     values.append(mean)
+        
+    # df = pd.DataFrame(list(zip(sa.tickers, values)), columns =['Ticker', 'Mean Sentiment']) 
+    # df = df.set_index('Ticker')
+    # df = df.sort_values('Mean Sentiment', ascending=False)
+    # print ('\n')
+    # print (df)
+    pass

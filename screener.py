@@ -24,8 +24,6 @@ from pandas_datareader import data as pdr
 from yahoo_fin import stock_info as si
 from pandas import ExcelWriter
 
-
-
 import yfinance as yf
 import pandas as pd
 import datetime
@@ -36,7 +34,7 @@ yf.pdr_override()
 tickers = si.tickers_sp500()
 tickers = [item.replace(".", "-") for item in tickers] # Yahoo Finance uses dashes instead of dots
 
-# print(tickers)
+print(tickers)
 
 # index name, start, and end time
 index_name = 'NVDA' # S&P 500
@@ -163,13 +161,12 @@ for stock in rs_stocks:
         print(f"Could not gather data on {stock}")
 
 exportList = exportList.sort_values(by='RS_Rating', ascending=False)
-# print('\n', exportList)
+
 
 # YOOOOO AND IT WRITES TO EXCEL BOI
 writer = ExcelWriter("ScreenOutput.xlsx")
 exportList.to_excel(writer, "Sheet1")
-# this line marked for depreciation
-writer.save()
+writer.save() # this line marked for depreciation
 
 
 """
