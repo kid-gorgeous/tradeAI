@@ -13,8 +13,7 @@
     - Modules must be named, and updated
     - Configurations must be written
     - Requirements must be documented
-     
-
+    - Reincorperate an OpenAI wrapper for better queries and prediction models
 
 ### In addition to the CLI interface 
 
