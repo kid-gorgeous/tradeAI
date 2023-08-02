@@ -1,6 +1,14 @@
+pandas_datareader
+statsmodels
+matplotlib
+termcolor
 yahoo_fin
 yfinance
+requests
+urllib3
 pandas
-bs4
+openai
 nltk
-pandas_datareader
+bs4
+
+

@@ -11,6 +11,12 @@
     - sentiment_analysis.py provides a measured evaluation of the value of that daily market news
     - spa.py will become a single page application to view information and to visualize data
 
+#### Setup:
+> pip3 install -r requirements.txt'
+    - add your OpenAI API key if so desired
+> alias repl='cd /Users/evan/ai && python3 cli.py --repl'
+> python3 menu.py
+
 #### Features:
     - Symbol Screener (S&P500 index, ~500 symbols: 30% of best performers) 
     - Sentiment Analysizer (Mean Sentiment, and Conformal information)
