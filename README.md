@@ -28,9 +28,10 @@
     - Configurations must be written
     - Modules must be named, and updated
     - Reincorperating an OpenAI wrapper for better queries and prediction models
+    - Virtualization in a container or within a virtual enviorment (venv)
 
 ---
-### In addition to the CLI interface 
+### A brief introduction: 
 
 In addition to the CLI interface, and menu systems, I will be working to provide a LTM module on top of the OpenAI provide API. For my convenience I've intentionally built onto a AI framework. Currently Im working on gathering data for my experiments. Consequently, I've taken this upon myself, and has become work in itself. Luckily I am gather market information with a baked in REST API.
 
@@ -38,6 +39,7 @@ Information like sentiment scores, news, risk, and popularity are gathered, and 
 
 Further features will allow for better data scrapping methods, and will allow the user to browse the internet will chatting with the Bot about the current symbol, new, or query that the user is looking for while also learning more about the user themselves and gathering data itself. 
 
+---
 ### On the horizon
 
 Even though this system is designed to allow the user to view and maintain a large
