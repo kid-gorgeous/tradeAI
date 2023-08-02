@@ -1,6 +1,6 @@
 ### TradeAI - ChatGPT, and Machine Learning enhanced Portfolio Management System
 
-> *"Trade like you've never traded before ... misrepresent, and under-educated"* - Me ...
+> *"Trade like you've never traded before ... misrepresented, and under-educated"* - Me ...
 
 #### File information:
     - api.py will provide the user access to the OpenAI API
