@@ -17,6 +17,7 @@ import datetime
 import talib 
 import ta
 import pandas as pd
+import pandas_ta as ta
 import requests
 yf.pdr_override()
 
@@ -54,29 +55,29 @@ st.line_chart(data['Adj Close'])
 
 # ## SMA and EMA
 #Simple Moving Average
-data['SMA'] = talib.SMA(data['Adj Close'], timeperiod = 20)
+data['SMA'] = ta.sma(data['Adj Close'], timeperiod = 20)
 
 # Exponential Moving Average
-data['EMA'] = talib.EMA(data['Adj Close'], timeperiod = 20)
+data['EMA'] = ta.ema(data['Adj Close'], timeperiod = 20)
 
 # Plot
 st.header(f"Simple Moving Average vs. Exponential Moving Average\n {company_name}")
 st.line_chart(data[['Adj Close','SMA','EMA']])
 
-# Bollinger Bands
-data['upper_band'], data['middle_band'], data['lower_band'] = talib.BBANDS(data['Adj Close'], timeperiod =20)
+# # Bollinger Bands
+# data['lower_band'], data['middle_band'], data['upper_band'] = ta.bbands(data['Adj Close'], length =20)
 
-# Plot
-st.header(f"Bollinger Bands\n {company_name}")
-st.line_chart(data[['Adj Close','upper_band','middle_band','lower_band']])
+# # Plot
+# st.header(f"Bollinger Bands\n {company_name}")
+# st.line_chart(data[['Adj Close','upper_band','middle_band','lower_band']])
 
 # ## MACD (Moving Average Convergence Divergence)
 # MACD
-data['macd'], data['macdsignal'], data['macdhist'] = talib.MACD(data['Adj Close'], fastperiod=12, slowperiod=26, signalperiod=9)
-
-# Plot
-st.header(f"Moving Average Convergence Divergence\n {company_name}")
-st.line_chart(data[['macd','macdsignal']])
+# data['macd'], data['macdsignal'], data['macdhist'] = ta.macd(data['Adj Close'], fastperiod=12, slowperiod=26, signalperiod=9)
+# data['macd'], data['macdsignal'], data['macdhist'] = talib.MACD(data['Adj Close'], fastperiod=12, slowperiod=26, signalperiod=9)
+# # Plot
+# st.header(f"Moving Average Convergence Divergence\n {company_name}")
+# st.line_chart(data[['macd','macdsignal']])
 
 # ## CCI (Commodity Channel Index)
 # # CCI
@@ -88,16 +89,16 @@ st.line_chart(data[['macd','macdsignal']])
 
 # ## RSI (Relative Strength Index)
 # RSI
-data['RSI'] = talib.RSI(data['Adj Close'], timeperiod=14)
+# data['RSI'] = ta.rsi(data['Adj Close'], timeperiod=14)
 
-# Plot
-st.header(f"Relative Strength Index\n {company_name}")
-st.line_chart(data['RSI'])
+# # Plot
+# st.header(f"Relative Strength Index\n {company_name}")
+# st.line_chart(data['RSI'])
 
-# ## OBV (On Balance Volume)
-# OBV
-data['OBV'] = talib.OBV(data['Adj Close'], data['Volume'])/10**6
+# # ## OBV (On Balance Volume)
+# # OBV
+# data['OBV'] = ta.obv(data['Adj Close'], data['Volume'])/10**6
 
-# Plot
-st.header(f"On Balance Volume\n {company_name}")
-st.line_chart(data['OBV'])
+# # Plot
+# st.header(f"On Balance Volume\n {company_name}")
+# st.line_chart(data['OBV'])

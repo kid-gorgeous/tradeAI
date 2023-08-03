@@ -9,6 +9,7 @@ requests
 urllib3
 pandas
 openai
-TA-Lib
+wheel
+pandas-ta
 nltk
 bs4
