@@ -1,5 +1,6 @@
 pandas_datareader
 statsmodels
+streamlit
 matplotlib
 termcolor
 yahoo_fin
