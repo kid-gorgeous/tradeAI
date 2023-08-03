@@ -2,6 +2,7 @@
 /database.md
 /database.db
 /config.py
+/test.py
 /attn.py
 /api.py
 /app.py
