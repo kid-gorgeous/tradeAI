@@ -1,3 +1,16 @@
+""" 
+
+    This is a streamlit app that will allow you to visualize technical indicators 
+    for any stock. It's currently a work in progress. The restful api is not yet
+    working. I'm not sure if I'll be able to get it to work. 
+
+    TODO: to fix this module, the symbol pages from the symbols directory will be used
+    to populate the dropdown menu, graphs, charts, etc.
+
+
+
+ """
+
 import yfinance as yf
 import streamlit as st
 import datetime 
@@ -7,6 +20,8 @@ import pandas as pd
 import requests
 yf.pdr_override()
 
+
+
 st.write("""
 # Technical Analysis Web Application
 Shown below are the **Moving Average Crossovers**, **Bollinger Bands**, **MACD's**, **Commodity Channel Indexes**, and **Relative Strength Indexes** of any stock!
@@ -14,6 +29,7 @@ Shown below are the **Moving Average Crossovers**, **Bollinger Bands**, **MACD's
 
 st.sidebar.header('User Input Parameters')
 
+# Sidebar
 today = datetime.date.today()
 def user_input_features():
     ticker = st.sidebar.text_input("Ticker", 'AAPL')
@@ -22,34 +38,15 @@ def user_input_features():
     return ticker, start_date, end_date
 
 symbol, start, end = user_input_features()
-
-
-# and broken function... will fix later... hueheu
-# potentially overload this function to search csv instead??
-def get_symbol(symbol):
-    # questionable url
-    url = "http://d.yimg.com/autoc.finance.yahoo.com/autoc?query={}&region=1&lang=en".format(symbol)
-    result = requests.get(url).json()
-    for x in result['ResultSet']['Result']:
-        if x['symbol'] == symbol:
-            return x['name']
-company_name = get_symbol(symbol.upper())
-
+company_name = symbol.upper() # get_symbol(symbol.upper())
 start = pd.to_datetime(start)
 end = pd.to_datetime(end)
 
-
-
-
-
-
-
-
-
-
-
 # Read data 
 data = yf.download(symbol,start,end)
+
+
+# Charts
 
 # Adjusted Close Price
 st.header(f"Adjusted Close Price\n {company_name}")
@@ -81,13 +78,13 @@ data['macd'], data['macdsignal'], data['macdhist'] = talib.MACD(data['Adj Close'
 st.header(f"Moving Average Convergence Divergence\n {company_name}")
 st.line_chart(data[['macd','macdsignal']])
 
-## CCI (Commodity Channel Index)
-# CCI
-cci = ta.trend.cci(data['High'], data['Low'], data['Close'], n=31, c=0.015)
+# ## CCI (Commodity Channel Index)
+# # CCI
+# cci = ta.trend.cci(data['High'], data['Low'], data['Close'], n=31, c=0.015)
 
-# Plot
-st.header(f"Commodity Channel Index\n {company_name}")
-st.line_chart(cci)
+# # Plot
+# st.header(f"Commodity Channel Index\n {company_name}")
+# st.line_chart(cci)
 
 # ## RSI (Relative Strength Index)
 # RSI

@@ -1,5 +1,6 @@
 # from ltm import DatabaseModel
 from termcolor import colored
+from config import openai_api_key
 import requests
 import openai
 import sys
@@ -7,12 +8,9 @@ import sys
 
 class OpenAIClient:
     def __init__(self):
-        self.api_key = ''
+        self.api_key = openai_api_key
         self.max_tokens = 1000
         self.temperature = 0.5
-        
-
-        # self.db = DatabaseModel().create_table()
   
     def get_completion(self, prompt, quant=None):
         openai.api_key = self.api_key

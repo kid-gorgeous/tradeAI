@@ -92,6 +92,21 @@ while True:
     inp = input("\nEnter a symbol: ")
     menu = Menu(inp.upper())    
 
-    menu.getSentimentAnalysis()
-    menu.getNews()
-    menu.getRiskAnalysis()
+    while True:
+        print("\nMenu:")
+        print("1. Get Sentiment Analysis")
+        print("2. Get News")
+        print("3. Get Risk Analysis")
+        print("4. Exit\n")
+        choice = input("Enter your choice: ")
+        if choice == '1':
+            menu.getSentimentAnalysis()
+        elif choice == '2':
+            menu.getNews()
+        elif choice == '3':
+            menu.getRiskAnalysis()
+        elif choice == '4':
+            break
+        else:
+            print("Invalid choice. Please try again.")
+            continue

@@ -53,7 +53,8 @@ class News:
                     a_text = table_row.a.text
                     td_text = table_row.td.text
                     td_text = td_text.strip()
-                    print('- ',a_text,'(',td_text,')')
+                    url_text = table_row.a.get('href')
+                    print('- ',a_text,'(',td_text,')', url_text)
                     if i == n-1:
                         break
         except KeyError:

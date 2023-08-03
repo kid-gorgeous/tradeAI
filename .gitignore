@@ -1,8 +1,10 @@
 # files
 /database.md
 /database.db
+/config.py
 /attn.py
 /api.py
+/app.py
 /ltm.py
 /api.txt
 /cli.py
