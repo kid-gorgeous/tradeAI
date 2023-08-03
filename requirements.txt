@@ -10,5 +10,3 @@ pandas
 openai
 nltk
 bs4
-
-gunicorn
