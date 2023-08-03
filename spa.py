@@ -15,7 +15,7 @@ import yfinance as yf
 import streamlit as st
 import datetime 
 # import talib 
-import ta
+# import ta
 import pandas as pd
 import pandas_ta as ta
 import requests
