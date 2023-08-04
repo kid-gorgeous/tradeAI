@@ -120,18 +120,22 @@ with st.expander("Risk Analysis"):
     | Jarque-Bera | {jb} |
     
     """)
-
-news = News(symbol,tickers=[symbol])
-news = news.getNews()
-st.header(f"News for {company_name}")
-st.table(news)
-
-sa = SA(symbol,tickers=[symbol])
-s_index, mean_index = sa.sentimentAnalysis()
-st.header(f"Sentiment Analysis for {company_name}")
-st.table(s_index)
-st.table(mean_index)
-
+try: 
+    news = News(symbol,tickers=[symbol])
+    news = news.getNews()
+    st.header(f"News for {company_name}")
+    st.table(news)
+except:
+    pass
+    
+try:
+    sa = SA(symbol,tickers=[symbol])
+    s_index, mean_index = sa.sentimentAnalysis()
+    st.header(f"Sentiment Analysis for {company_name}")
+    st.table(s_index)
+    st.table(mean_index)
+except:
+    pass
 
     # # Bollinger Bands
     # data['lower_band'], data['middle_band'], data['upper_band'] = ta.bbands(data['Adj Close'], length =20)
