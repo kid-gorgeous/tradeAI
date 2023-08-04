@@ -25,6 +25,7 @@
     - Sentiment Analysizer (Mean Sentiment, and Conformal information)
     - Risk Analysizer (The daredevils tool belt)
     - Streamlit provided Webframework (deployed on HerokU! via trade.ejdev.com!)
+    - A very archaic News Table (but always upto date)
     - (WIP) Voice Transcriber...? (whisper openai or something)
     - (WIP) Full-Stack Application features.... (Flask???, Streamlit???)
     - (WIP) CLI, and REST API interface (fastapi???, click???, sys.argv???)
@@ -64,6 +65,7 @@ trustworthy ways to access brokrage accounts... Alas, it is on the TODO list.
 
 Further information will be provided. Stay tuned!
 
+It might be time ... {prompt}
 
 ---
 ##### MIT License
