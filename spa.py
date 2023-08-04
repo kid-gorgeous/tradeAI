@@ -45,11 +45,7 @@ today = datetime.date.today()
 def user_input_features():
     try:
         ticker = st.sidebar.text_input("Ticker", 'AAPL')
-        if tickker == None:
-            ticker = 'AAPL'
         start_date = st.sidebar.text_input("Start Date", '2013-01-01')
-        if start_date == None:
-            start_date = '2013-01-01'
         end_date = st.sidebar.text_input("End Date", f'{today}')
         return ticker, start_date, end_date
     except:
