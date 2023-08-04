@@ -33,97 +33,107 @@ import datetime
 import time
 yf.pdr_override()
 
+"""Creates an pandas DataFrame object containing the top 1-- best performing stocks in the S&P 500"""
+
+
 class Screener:
     def __init__(self):
         self.symbols = si.tickers_sp500()
         self.symbols = [item.replace(".", "-") for item in self.symbols] # Yahoo Finance uses dashes instead of dots
-    
-    # aggregates and calculates the data for the screener (returns, rs score, and minierini scores)
-    def calcReturns(self):
-        tickers = self.symbols
-        tickers = [item.replace(".", "-") for item in tickers] # Yahoo Finance uses dashes instead of dots
+        self.index_name = '^GSPC'
+        self.exportList = exportList = pd.DataFrame(columns=['Stock', "RS_Rating", "50 Day MA", "150 Day Ma", "200 Day MA", "52 Week Low", "52 week High"])
 
-        index_name = '^GSPC' # S&P 500
-        start_date = datetime.datetime.now() - datetime.timedelta(days=365)
-        end_date = datetime.date.today()
+    def setIndex(self, index_name=''):
+        try:
+            if (type(index_name) == str and len(index_name) != 0):
+                self.index_name = index_name
+            else:
+                raise Exception('Index name must be a string')
+        except Exception as e:
+            print(e)
+            self.index_name = '^GSPC'
 
-        index_df = pdr.get_data_yahoo(index_name, start_date, end_date)
-        index_df['Precent Change'] = index_df['Adj Close'].pct_change()
-        index_return = (index_df['Precent Change'] + 1).cumprod()[-1]
+        print(f'Index set to: {self.index_name}')
 
-        # exportList of index information
-        exportList = pd.DataFrame(columns=['Stock', "RS_Rating", "50 Day MA", "150 Day Ma", "200 Day MA", "52 Week Low", "52 week High"])
-        returns_multiples = []
-
-        for ticker in tickers:
-            # download historical data as CSV for each stock
-            df = pdr.get_data_yahoo(ticker, start_date, end_date)
-            
-            df.to_csv(f'./symbols/{ticker}.csv')
-
-            # calculate returns relative to the market
-            df['Percent Change'] = df['Adj Close'].pct_change()
-            stock_return = (df['Percent Change'] + 1).cumprod()[-1]
-
-            returns_multiple = round((stock_return / index_return), 2)
-            returns_multiples.extend([returns_multiple])
-
-            print (f'Ticker: {ticker}; Returns Multiple against S&P 500: {returns_multiple}\n')
-            time.sleep(1) # unnecessary but will help curb potential errors... (working on fix for next week... TODO)
-
-        # dataframe of stocks and their returns
-        rs_df = pd.DataFrame(list(zip(tickers, returns_multiples)), columns=['Ticker', 'Returns_multiple'])
+    def createRSIndex(self, index_return='', returns_multiples=''):
+        rs_df = pd.DataFrame(list(zip(self.symbols, returns_multiples)), columns=['Ticker', 'Returns_multiple'])
         rs_df['RS_Rating'] = rs_df.Returns_multiple.rank(pct=True) * 100
         rs_df = rs_df[rs_df.RS_Rating >= rs_df.RS_Rating.quantile(.70)]
 
+        return rs_df
 
+    def createSymbolDirectory(self, start_date, end_date, path):
+        for ticker in self.symbols:
+            df = pdr.get_data_yahoo(ticker, start_date, end_date)
+            df.to_csv(f'{path}/{ticker}.csv')
+            print(f':\nSaved {ticker}.csv')
 
+    def updateSymbolDirectoy(self, start_date, end_date):
+        for ticker in self.symbols:
+            df = pdr.get_data_yahoo(ticker, start_date, end_date)
+            df.to_csv(f'./symbols/{ticker}.csv')
+            print(f':\nRefreshing {ticker}.csv. Update complete on {datetime.datetime.now()}')
+        
+    def fetchTimeDeltas(self):
+        start_date = datetime.datetime.now() - datetime.timedelta(days=365)
+        end_date = datetime.date.today()
+        return start_date, end_date
 
+    def fetchIndexData(self, start_date, end_date):
+        index_df = pdr.get_data_yahoo(self.index_name, start_date, end_date)
+        index_df['Precent Change'] = index_df['Adj Close'].pct_change()
+        index_return = (index_df['Precent Change'] + 1).cumprod()[-1]
 
+        self.index_return = index_return
+        return index_return
+    
+    def fetchMultipleReturnData(self, index_return=''):
+        returns_multiples = []
 
+        for ticker in self.symbols:
+            print(f'Reading symbol: {ticker}.csv\n')
+            df = pd.read_csv(f'./symbols/{ticker}.csv')
+            try:
+                print(f'Calculating returns for {ticker}\n')
+                df['Percent Change'] = df['Adj Close'].pct_change()
+                try:
+                    print(f'Calculating Return for {ticker}\n')
+                    stock_return = (df['Percent Change'] + 1).cumprod()[-1]
+                    returns_multiple = round((stock_return / index_return), 2)
+                except:
+                    pass
+                print (f'Ticker: {ticker}; Returns Multiple against S&P 500: {returns_multiple}\n')
+            except:
+                pass
 
+            time.sleep(1)
 
+        return returns_multiples
 
-
-
-
-        # checking minervini conditions of top 30% of stocks in the list
-        rs_stocks = rs_df["Ticker"]
+    # will aplly rs ratings to all stocks in the list
+    def createMinerviniDataSet(self, rs_df, save=False):
+        rs_stocks = rs_df['Ticker']
         for stock in rs_stocks:
             try:
-                # altered line of code to access a file system of indexed stocks
-                df = pd.read_csv(f'../symbols/{stock}.csv', index_col=0)
+                df = pd.read_csv(f'./symbols/{stock}.csv', index_col=0)
                 sma = [50, 150, 200]
                 for x in sma:
-                    # calculates the sma over a series of rolling windows based on the mean of the adjusted close to 2 decimal places
-                    df["SMA_"+str(x)] = round(df['Adj Close'].rolling(window=x).mean(),2)
-
-                # stored values based on the current day (last value in the list)
+                    df["SMA_"+str(x)] = round(df['Adj Close'].rolling(window=x).mean(), 2)
                 currentClose = df["Adj Close"][-1]
                 moving_average_50 = df["SMA_50"][-1]
                 moving_average_150 = df["SMA_150"][-1]
                 moving_average_200 = df["SMA_200"][-1]
-                # the list comphrension is used to get the last 260 days of data, and then the min value is found 
-                # (the lowest price over the last year)
                 low_of_52week = round(min(df["Low"][-260:]), 2)
-                # the same type of list comprehension is used again but for the max value (the highest price over the last year)
                 high_of_52week = round(max(df["High"][-260:]), 2)
-                # the following comprehension is based on the current Ticker stock symbol, and the RS rating found from the
-                # first item in the columns stack
                 RS_Rating = round(rs_df[rs_df['Ticker']==stock].RS_Rating.tolist()[0])
-
-                try: # taking the last 20 days of data and finding the moving average
+                try:
                     moving_average_200_20 = df["SMA_200"][-20]
-                    # thank you github coplit lmao
-                except Exception:
+                except:
                     moving_average_200_20 = 0
-
-
-
-
-
-                # the next part defines the conditions for the minervini strategy
                 
+        
+            
+                # the next part defines the conditions for the minervini strategy   
                 # So, ... Condition 1: Current Prive >? 150 SMA and >? 200 SMA
                 # nice bound checking lmfaoooo
                 condition_1 = currentClose > moving_average_150 > moving_average_200
@@ -151,35 +161,64 @@ class Screener:
                 if (condition_1 and condition_2 and condition_3 and condition_4 and condition_5 and condition_6 and condition_7):
 
                     # this line marked for depreciation
-                    exportList = exportList.append({'Stock': stock, "RS_Rating": RS_Rating, "50 Day MA": moving_average_50,
+                    self.exportList = self.exportList.append({'Stock': stock, "RS_Rating": RS_Rating, "50 Day MA": moving_average_50,
                                                     "150 Day MA": moving_average_150, "200 Day MA": moving_average_200,
                                                     "52 Week Low": low_of_52week, "52 week High": high_of_52week}, ignore_index=True)
                     print (stock + " made the Minervini requirements")
 
+
             except Exception as e:
                 print(e)
-                print(f"Could not gather data on {stock}")
+                print(f"Could not gather data on {stock}")   
+            self.exportList = self.exportList.sort_values(by='RS_Rating', ascending=False)
 
-            exportList = exportList.sort_values(by='RS_Rating', ascending=False)
+        return self.exportList
 
-            # YOOOOO AND IT WRITES TO EXCEL BOI
+        if save == True:
+            self.exportList.to_csv("ScreenOutput.csv")
+
             writer = ExcelWriter("ScreenOutput.xlsx")
-            exportList.to_excel(writer, "Sheet1")
-            writer.save() # this line marked for depreciation
+            self.exportList.to_excel(writer, "Sheet1")
+            writer.save()
+            print("File Saved")
+        
 
-        pass
-    
-    # will aplly rs ratings to all stocks in the list
-    def calcRS(self):
-        pass
+
+
     # will soon apply the minervini conditions to generate the top 30% of stocks in the list
-    def processData(self):
+    def setConditions(self):
         pass
 
 def main():
+
     screener = Screener()
-    screener.calcReturns()
-    pass
+    
+    screener.setIndex()
+    start_time, end_time = screener.fetchTimeDeltas()
+    print(f'Start time: {start_time}\nEnd time: {end_time}')
+
+
+
+    # if not os.path.exists('./symbols'):
+    #     os.makedirs('./symbols')
+    #     print("New Directory created")
+
+    # screener.createSymbolDirectory(start_time, end_time, path='./symbols')
+    # print("Symbol directory created")
+
+
+    index_return = screener.fetchIndexData(start_time, end_time)
+    print("Index data fetched")
+    returns_multiples = screener.fetchMultipleReturnData(index_return)
+    print("Multiple return data fetched")
+    rs_df = screener.createRSIndex(index_return=index_return, returns_multiples=returns_multiples)
+    print("RS index created")
+
+    top100 = screener.createMinerviniDataSet(rs_df, save=True)
+
+
+    print(top100)
+
 
 if __name__ == "__main__":
     main()
