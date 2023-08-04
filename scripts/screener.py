@@ -37,7 +37,7 @@ yf.pdr_override()
 tickers = si.tickers_sp500()
 tickers = [item.replace(".", "-") for item in tickers] # Yahoo Finance uses dashes instead of dots
 
-# print(tickers)
+print(tickers)
 
 # index name, start, and end time
 index_name = 'NVDA' # S&P 500
