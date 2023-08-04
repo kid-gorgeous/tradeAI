@@ -55,9 +55,9 @@ class News:
                     td_text = td_text.strip()
                     url_text = table_row.a.get('href')
                     
-                    # create an append method that adds the headline and the url to a list
-                    news_dataframe = news_dataframe.concat({'Ticker': ticker, 'Headline': a_text, 'Date': td_text, 'URL': url_text}, ignore_index=True)
-                    
+                    new_row = {'Ticker': ticker, 'Headline': a_text, 'Date': td_text, 'URL': url_text}
+                    news_dataframe = pd.concat([news_dataframe, pd.DataFrame([new_row])], ignore_index=True)
+
                     if i == n-1:
                         break
                            
