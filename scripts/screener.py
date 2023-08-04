@@ -19,6 +19,9 @@
 """ TODO:
     Optimize the code to run faster, and more efficiently by creating an excusable time frame for the data to be pulled allowing for the program to only run once or twice a day.
 """
+import os
+
+os.system('mkdir symbols')
 
 from pandas_datareader import data as pdr
 from yahoo_fin import stock_info as si
@@ -54,6 +57,7 @@ index_return = (index_df['Precent Change'] + 1).cumprod()[-1]
 for ticker in tickers:
     # download historical data as CSV for each stock
     df = pdr.get_data_yahoo(ticker, start_date, end_date)
+    
     df.to_csv(f'./symbols/{ticker}.csv')
 
     # calculate returns relative to the market
