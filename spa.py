@@ -15,27 +15,12 @@ import pandas_ta as ta
 import requests
 yf.pdr_override()
 
-class App:
-    def __init__(self):
-        self.symbol, self.start, self.end = user_input_features()
-        self.company_name = self.symbol.upper()
-        self.titleText, self.introText = ""
-        self.data = None
-
-        self.header = 'User Input Parameters'
-        self.today = datetime.date.today()
-
-    def getData(self):
-        self.data = yf.download(self.symbol,self.start,self.end)
-
-    def run(self):
-        pass
 
 
 st.title('TA App')
 st.write("""
 ## Technical Analysis Web Application
-Shown below are the **Moving Average Crossovers**, **Bollinger Bands**, **MACD's**, **Commodity Channel Indexes**, and **Relative Strength Indexes** of any stock!
+Shown below are the **Moving Average Crossovers** of the searched stock!
 """)
 
 st.sidebar.header('User Input Parameters')
@@ -52,7 +37,7 @@ def user_input_features():
         pass
 
 symbol, start_date, end_date = user_input_features()
-company_name = symbol.upper() # get_symbol(symbol.upper())
+company_name = symbol.upper()
 start = pd.to_datetime(start_date)
 end = pd.to_datetime(end_date)
 
@@ -60,6 +45,7 @@ end = pd.to_datetime(end_date)
 data = yf.download(symbol,start,end)
 data['SMA'] = ta.sma(data['Adj Close'], timeperiod = 20)
 data['EMA'] = ta.ema(data['Adj Close'], timeperiod = 20)
+
 
 # Plot
 st.header(f"SMA vs. EMA for the Adjusted Closing price: \n {company_name}")
@@ -101,28 +87,27 @@ try:
 
         st.write(f"""
         #### Data for the stock {company_name} 
-        from {start_date} to {end_date}
+            from {start_date} to {end_date}
 
 
-        | Metric | Value |
-        | ------ | ----- |
-        | Average Return | {avg_ret} |
-        | Standard Deviation | {stdev} |
-        | Sharpe Ratio | {shrp} |
-        | Sortino Ratio | {sortino} |
-        | Beta | {beta} |
-        | Alpha | {alpha} |
-        | Treynor Ratio | {tr} |
-        | Information Ratio | {ir} |
-        | Value at Risk | {var} |
-        | Conditional Value at Risk | {cvar} |
-        | R-Squared | {rs} |
-        | Correlation | {corr} |
-        | Volatility | {vol} |
-        | Skewness | {skew} |
-        | Kurtosis | {k} |
-        | Jarque-Bera | {jb} |
-        
+            | Metric | Value |
+            | ------ | ----- |
+            | Average Return | {avg_ret} |
+            | Standard Deviation | {stdev} |
+            | Sharpe Ratio | {shrp} |
+            | Sortino Ratio | {sortino} |
+            | Beta | {beta} |
+            | Alpha | {alpha} |
+            | Treynor Ratio | {tr} |
+            | Information Ratio | {ir} |
+            | Value at Risk | {var} |
+            | Conditional Value at Risk | {cvar} |
+            | R-Squared | {rs} |
+            | Correlation | {corr} |
+            | Volatility | {vol} |
+            | Skewness | {skew} |
+            | Kurtosis | {k} |
+            | Jarque-Bera | {jb} |
         """)
 except:
     pass
@@ -144,41 +129,3 @@ try:
 except:
     pass
 
-    # # Bollinger Bands
-    # data['lower_band'], data['middle_band'], data['upper_band'] = ta.bbands(data['Adj Close'], length =20)
-
-    # # Plot
-    # st.header(f"Bollinger Bands\n {company_name}")
-    # st.line_chart(data[['Adj Close','upper_band','middle_band','lower_band']])
-
-    # ## MACD (Moving Average Convergence Divergence)
-    # MACD
-    # data['macd'], data['macdsignal'], data['macdhist'] = ta.macd(data['Adj Close'], fastperiod=12, slowperiod=26, signalperiod=9)
-    # data['macd'], data['macdsignal'], data['macdhist'] = talib.MACD(data['Adj Close'], fastperiod=12, slowperiod=26, signalperiod=9)
-    # # Plot
-    # st.header(f"Moving Average Convergence Divergence\n {company_name}")
-    # st.line_chart(data[['macd','macdsignal']])
-
-    # ## CCI (Commodity Channel Index)
-    # # CCI
-    # cci = ta.trend.cci(data['High'], data['Low'], data['Close'], n=31, c=0.015)
-
-    # # Plot
-    # st.header(f"Commodity Channel Index\n {company_name}")
-    # st.line_chart(cci)
-
-    # ## RSI (Relative Strength Index)
-    # RSI
-    # data['RSI'] = ta.rsi(data['Adj Close'], timeperiod=14)
-
-    # # Plot
-    # st.header(f"Relative Strength Index\n {company_name}")
-    # st.line_chart(data['RSI'])
-
-    # # ## OBV (On Balance Volume)
-    # # OBV
-    # data['OBV'] = ta.obv(data['Adj Close'], data['Volume'])/10**6
-
-    # # Plot
-    # st.header(f"On Balance Volume\n {company_name}")
-    # st.line_chart(data['OBV'])
