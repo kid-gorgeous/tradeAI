@@ -3,7 +3,7 @@ statsmodels
 streamlit
 matplotlib
 termcolor
-yahoo_fin
+yahoo-fin
 yfinance
 requests
 urllib3
