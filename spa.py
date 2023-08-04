@@ -62,10 +62,14 @@ data['EMA'] = ta.ema(data['Adj Close'], timeperiod = 20)
 st.header(f"SMA vs. EMA for the Adjusted Closing price: \n {company_name}")
 st.line_chart(data[['Adj Close','SMA','EMA']])
 
+import sys
+sys.path.append('scripts')
 from risk_mgmt import RiskAnalysis, printInfo
 from sentiment_analysis import SA, News
+
 benchmark_symbol = '^GSPC'
 risk_analysis = RiskAnalysis(symbol, benchmark_symbol,start,end, 0.03)
+
 hs = risk_analysis.getHistoricalData(symbol,start,end)
 bd = risk_analysis.getBenchmarkData(benchmark_symbol,start,end)
 arets, brets = risk_analysis.getReturns(hs,bd)
