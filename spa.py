@@ -67,59 +67,63 @@ sys.path.append('scripts')
 from risk_mgmt import RiskAnalysis, printInfo
 from sentiment_analysis import SA, News
 
-benchmark_symbol = '^GSPC'
-risk_analysis = RiskAnalysis(symbol, benchmark_symbol,start,end, 0.03)
+try:
+    benchmark_symbol = '^GSPC'
+    risk_analysis = RiskAnalysis(symbol, benchmark_symbol,start,end, 0.03)
 
-hs = risk_analysis.getHistoricalData(symbol,start,end)
-bd = risk_analysis.getBenchmarkData(benchmark_symbol,start,end)
-arets, brets = risk_analysis.getReturns(hs,bd)
+    hs = risk_analysis.getHistoricalData(symbol,start,end)
+    bd = risk_analysis.getBenchmarkData(benchmark_symbol,start,end)
+    arets, brets = risk_analysis.getReturns(hs,bd)
 
-with st.expander("Risk Analysis"):
-    # get the required values
-    avg_ret         = risk_analysis.getAverageReturn(arets)
-    stdev           = risk_analysis.getStandardDeviation(arets)
-    shrp            = risk_analysis.getSharpeRatio(avg_ret, stdev)
-    drets           = risk_analysis.getDownsideReturns(arets)
-    sortino         = risk_analysis.getSortinoRatio(arets, avg_ret, drets, risk_free_rate=0.03)
-    beta            = risk_analysis.getBeta(arets, brets)
-    alpha           = risk_analysis.getAlpha(arets, brets, beta)
-    tr              = risk_analysis.getTreynorRatio(avg_ret, 0.03, beta)
-    ir              = risk_analysis.getInformationRatio(arets, brets)
-    maxd            = risk_analysis.getMaxDrawdown(arets)
-    var             = risk_analysis.getVaR(arets)
-    cvar            = risk_analysis.getCVaR(arets)
-    rs              = risk_analysis.getRSquared(arets, brets)
-    corr            = risk_analysis.getCorrelation(arets, brets)
-    vol             = risk_analysis.getVolatility(arets)
-    skew            = risk_analysis.getSkewness(arets)
-    k               = risk_analysis.getKurtosis(arets)
-    jb              = risk_analysis.getJarqueBera(arets)
+    with st.expander("Risk Analysis"):
+        # get the required values
+        avg_ret         = risk_analysis.getAverageReturn(arets)
+        stdev           = risk_analysis.getStandardDeviation(arets)
+        shrp            = risk_analysis.getSharpeRatio(avg_ret, stdev)
+        drets           = risk_analysis.getDownsideReturns(arets)
+        sortino         = risk_analysis.getSortinoRatio(arets, avg_ret, drets, risk_free_rate=0.03)
+        beta            = risk_analysis.getBeta(arets, brets)
+        alpha           = risk_analysis.getAlpha(arets, brets, beta)
+        tr              = risk_analysis.getTreynorRatio(avg_ret, 0.03, beta)
+        ir              = risk_analysis.getInformationRatio(arets, brets)
+        maxd            = risk_analysis.getMaxDrawdown(arets)
+        var             = risk_analysis.getVaR(arets)
+        cvar            = risk_analysis.getCVaR(arets)
+        rs              = risk_analysis.getRSquared(arets, brets)
+        corr            = risk_analysis.getCorrelation(arets, brets)
+        vol             = risk_analysis.getVolatility(arets)
+        skew            = risk_analysis.getSkewness(arets)
+        k               = risk_analysis.getKurtosis(arets)
+        jb              = risk_analysis.getJarqueBera(arets)
 
-    st.write(f"""
-    #### Data for the stock {company_name} 
-    from {start_date} to {end_date}
+        st.write(f"""
+        #### Data for the stock {company_name} 
+        from {start_date} to {end_date}
 
 
-    | Metric | Value |
-    | ------ | ----- |
-    | Average Return | {avg_ret} |
-    | Standard Deviation | {stdev} |
-    | Sharpe Ratio | {shrp} |
-    | Sortino Ratio | {sortino} |
-    | Beta | {beta} |
-    | Alpha | {alpha} |
-    | Treynor Ratio | {tr} |
-    | Information Ratio | {ir} |
-    | Value at Risk | {var} |
-    | Conditional Value at Risk | {cvar} |
-    | R-Squared | {rs} |
-    | Correlation | {corr} |
-    | Volatility | {vol} |
-    | Skewness | {skew} |
-    | Kurtosis | {k} |
-    | Jarque-Bera | {jb} |
-    
-    """)
+        | Metric | Value |
+        | ------ | ----- |
+        | Average Return | {avg_ret} |
+        | Standard Deviation | {stdev} |
+        | Sharpe Ratio | {shrp} |
+        | Sortino Ratio | {sortino} |
+        | Beta | {beta} |
+        | Alpha | {alpha} |
+        | Treynor Ratio | {tr} |
+        | Information Ratio | {ir} |
+        | Value at Risk | {var} |
+        | Conditional Value at Risk | {cvar} |
+        | R-Squared | {rs} |
+        | Correlation | {corr} |
+        | Volatility | {vol} |
+        | Skewness | {skew} |
+        | Kurtosis | {k} |
+        | Jarque-Bera | {jb} |
+        
+        """)
+except:
+    pass
+
 try: 
     news = News(symbol,tickers=[symbol])
     news = news.getNews()
