@@ -11,7 +11,7 @@
     - sentiment_analysis.py provides a measured evaluation of the value of that daily market news
     - spa.py will become a single page application to view information and to visualize data
 
-#### Setup:
+#### Setup CLI:
     - Add your OpenAI API key if so desired
     - Install the requirements
     - Update the API key in the api.py file
@@ -20,22 +20,23 @@
     - Run/Modify menu.py for TA tasks
 
 
-#### Features:
+#### Web Features:
     - Symbol Screener (S&P500 index, ~500 symbols: 30% of best performers) 
     - Sentiment Analysizer (Mean Sentiment, and Conformal information)
     - Risk Analysizer (The daredevils tool belt)
+    - Streamlit provided Webframework (deployed on HerokU! via trade.ejdev.com!)
     - (WIP) Voice Transcriber...? (whisper openai or something)
     - (WIP) Full-Stack Application features.... (Flask???, Streamlit???)
     - (WIP) CLI, and REST API interface (fastapi???, click???, sys.argv???)
 
 #### Usage and TODOs:
-    - Improving on overall modility of the application. 
-    - Most python files are not encapsulated yet
-    - The menu, and overall functionality of the application needs to be reanalysized on ease of use
-    - The front end of the application needs work
-    - Requirements must be documented
-    - Configurations must be written
-    - Modules must be named, and updated
+    - Improving on overall modility of the application. (Toot toot)
+    - Most python files are not encapsulated yet (Oh but they will be...)
+    - The menu, and overall functionality of the application needs to be reanalysized on ease of use (CMD removed, move to APP)
+    - The front end of the application needs work (YEAH! STYLE EVERYTHING!)
+    - Requirements must be documented (No )
+    - Configurations must be written (Just started lol)
+    - Modules must be named, and updated (This is mostly done)
     - Reincorperating an OpenAI wrapper for better queries and prediction models
     - Virtualization in a container or within a virtual enviorment (venv)
 
