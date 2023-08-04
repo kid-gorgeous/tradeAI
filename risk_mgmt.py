@@ -147,6 +147,8 @@ class RiskAnalysis:
             pass
         max_drawdown = drawdown.max()
 
+    
+
 def printInfo(sym,avg_ret,stdev,shrp,srt,beta,alpha,treynor,info,var,cvar,r_squared,correlation,volatility,skewness,kurtosis,jarque_bera):
     print("\nRisk Management Analytics: {}".format(sym))
     
@@ -183,7 +185,9 @@ def main():
     hs              = risk_analysis.getHistoricalData(ticker, start_date, end_date)
     bd              = risk_analysis.getBenchmarkData(benchmark_ticker, start_date, end_date)
     # get returns
-    arets, brets      = risk_analysis.getReturns(hs, bd)
+    arets, brets    = risk_analysis.getReturns(hs, bd)
+
+    # get the required values
     avg_ret         = risk_analysis.getAverageReturn(arets)
     stdev           = risk_analysis.getStandardDeviation(arets)
     shrp            = risk_analysis.getSharpeRatio(avg_ret, stdev)
@@ -207,6 +211,7 @@ def main():
     crets = (arets + 1).cumprod()
     cmax = crets.cummax()
     drawdown = (cmax - crets) / cmax
+
     printInfo(avg_ret,stdev,shrp,sortino,beta,alpha,tr,ir,var,cvar,rs,corr,vol,skew,k,jb)
     risk_analysis.plotGraph(drawdown, ticker)
     

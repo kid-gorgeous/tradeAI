@@ -20,6 +20,7 @@ from nltk.sentiment.vader import SentimentIntensityAnalyzer
 
 import nltk
 nltk.download('vader_lexicon')
+print('\n')
 
 class News:
     def __init__(self, symbol, tickers):
@@ -29,7 +30,7 @@ class News:
 
     def getNews(self):
         n = self.n
-
+        
         finwiz_url = 'https://finviz.com/quote.ashx?t='
         news_tables = {}
 
@@ -41,26 +42,30 @@ class News:
             news_table = html.find(id='news-table')
             news_tables[ticker] = news_table
 
+        # using news_tables to get the news headlines
+        news_dataframe = pd.DataFrame(columns=['Ticker', 'Headline', 'Date', 'URL'])
         try:
             for ticker in self.tickers:
                 df = news_tables[ticker]
                 df_tr = df.findAll('tr')
-            
-                print ('\n')
-                print ('Recent News Headlines for {}: \n'.format(ticker))
-                
+
                 for i, table_row in enumerate(df_tr):
                     a_text = table_row.a.text
                     td_text = table_row.td.text
                     td_text = td_text.strip()
                     url_text = table_row.a.get('href')
-                    print('- ',a_text,'(',td_text,')', url_text)
+                    
+                    # create an append method that adds the headline and the url to a list
+                    news_dataframe = news_dataframe.append({'Ticker': ticker, 'Headline': a_text, 'Date': td_text, 'URL': url_text}, ignore_index=True)
+                    
                     if i == n-1:
                         break
+                           
+
         except KeyError:
             pass
 
-        print('\n')
+        return news_dataframe
 
 class SA:
     def __init__(self, symbol, tickers):
@@ -85,38 +90,32 @@ class SA:
 
     def getData(self):
         n = self.n
-        symbol = self.symbol
+        news_tables = self.getNewsTables()
 
-        finwiz_url = 'https://finviz.com/quote.ashx?t='
-        news_tables = {}
-
-        for ticker in self.tickers:
-            url = finwiz_url + ticker
-            req = Request(url=url,headers={'User-Agent': 'Mozilla/5.0'}) 
-            resp = urlopen(req)    
-            html = BeautifulSoup(resp, features="lxml")
-            news_table = html.find(id='news-table')
-            news_tables[ticker] = news_table
-
+        # using news_tables to get the news headlines
+        news_dataframe = pd.DataFrame(columns=['Ticker', 'Headline', 'Date', 'URL'])
         try:
             for ticker in self.tickers:
                 df = news_tables[ticker]
                 df_tr = df.findAll('tr')
-            
-                print ('\n')
-                print ('Recent News Headlines for {}: '.format(ticker))
-                
+
                 for i, table_row in enumerate(df_tr):
                     a_text = table_row.a.text
                     td_text = table_row.td.text
                     td_text = td_text.strip()
-                    print(a_text,'(',td_text,')')
+                    url_text = table_row.a.get('href')
+                    
+                    # create an append method that adds the headline and the url to a list
+                    news_dataframe = news_dataframe.append({'Ticker': ticker, 'Headline': a_text, 'Date': td_text, 'URL': url_text}, ignore_index=True)
+                    
                     if i == n-1:
                         break
+                           
+
         except KeyError:
             pass
 
-        print('\n')
+        return news_dataframe
 
     def parseData(self):
         news_tables = self.getNewsTables()
@@ -163,29 +162,22 @@ class SA:
         news_dict = {name: news.loc[news['Ticker'] == name] for name in unique_ticker}
 
         values = []
+        dataframe = None
         for ticker in self.tickers: 
             dataframe = news_dict[ticker]
             dataframe = dataframe.set_index('Ticker')
             dataframe = dataframe.drop(columns = ['Headline'])
-            print ('\n')
-            print (dataframe.head())
-            
-            inb = input("\nPress Enter to continue... (List of Sentiment Values)") 
             mean = round(dataframe['compound'].mean(), 2)
             values.append(mean)
 
         df = pd.DataFrame(list(zip(self.tickers, values)), columns =['Ticker', 'Mean Sentiment']) 
         df = df.set_index('Ticker')
         df = df.sort_values('Mean Sentiment', ascending=False)
-        print ('\n')
-        print (df)
+
+        return dataframe.head(), df
 
 def main():
-    n = 3 #the # of article headlines displayed per ticker
-    tickers = ['AAPL', 'TSLA', 'AMZN']
-    symbol = 'AAPL'
-
-    sa = SA(n,symbol,tickers)
+    sa = SA('AAPL',tickers=['AAPL'])
     sa.sentimentAnalysis()
     
 if __name__ == "__main__":
