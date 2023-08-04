@@ -64,10 +64,10 @@ st.line_chart(data[['Adj Close','SMA','EMA']])
 
 from risk_mgmt import RiskAnalysis, printInfo
 from sentiment_analysis import SA, News
-
-risk_analysis = RiskAnalysis(symbol,'^GSPC',start,end, 0.03)
+benchmark_symbol = '^GSPC'
+risk_analysis = RiskAnalysis(symbol, benchmark_symbol,start,end, 0.03)
 hs = risk_analysis.getHistoricalData(symbol,start,end)
-bd = risk_analysis.getBenchmarkData('^GSPC',start,end)
+bd = risk_analysis.getBenchmarkData(benchmark_symbol,start,end)
 arets, brets = risk_analysis.getReturns(hs,bd)
 
 with st.expander("Risk Analysis"):
