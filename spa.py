@@ -15,15 +15,12 @@ import pandas_ta as ta
 import requests
 yf.pdr_override()
 
+import config as cf
 
+st.title(cf.spa_name)
+st.write(cf.intro)
 
-st.title('TA App')
-st.write("""
-## Technical Analysis Web Application
-Shown below are the **Moving Average Crossovers** of the searched stock!
-""")
-
-st.sidebar.header('User Input Parameters')
+st.sidebar.header(cf.header)
 
 # Sidebar
 today = datetime.date.today()
@@ -57,7 +54,7 @@ from risk_mgmt import RiskAnalysis, printInfo
 from sentiment_analysis import SA, News
 
 try:
-    benchmark_symbol = '^GSPC'
+    benchmark_symbol = cf.benchmark_symbol
     risk_analysis = RiskAnalysis(symbol, benchmark_symbol,start,end, 0.03)
 
     hs = risk_analysis.getHistoricalData(symbol,start,end)

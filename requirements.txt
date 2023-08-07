@@ -1,9 +1,11 @@
 pandas_datareader
+scikit-learn
 statsmodels
 streamlit
 matplotlib
 termcolor
 yahoo-fin
+evaluate
 yfinance
 requests
 urllib3

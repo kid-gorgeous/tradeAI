@@ -5,19 +5,21 @@
 /test.py
 /attn.py
 /api.py
-/app.py
 /ltm.py
 /api.txt
 /cli.py
 /vid-to-text.py
+/test_screener.py
 /ScreenOutput.xlsx
 /webpage.code-workspace
 
 # directories
-tests/
+test/
 symbols/
 notebooks/
 utils/
+__pycache__/
+llama-2-finance/
 
 # ignore
 .DS_Store
