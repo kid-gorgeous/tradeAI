@@ -9,6 +9,7 @@ evaluate
 yfinance
 requests
 urllib3
+quandl
 pandas
 openai
 wheel

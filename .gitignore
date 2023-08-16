@@ -2,6 +2,7 @@
 /database.md
 /database.db
 /config.py
+/macroeco.py
 /test.py
 /attn.py
 /api.py
@@ -12,6 +13,7 @@
 /test_screener.py
 /ScreenOutput.xlsx
 /webpage.code-workspace
+/setup.sh
 
 # directories
 test/
@@ -20,9 +22,11 @@ notebooks/
 utils/
 __pycache__/
 llama-2-finance/
+LLMs/
 
 # ignore
 .DS_Store
 *.pyc
 *.ipynb
 *.mp4
+

@@ -8,6 +8,7 @@
  """
 
 import yfinance as yf
+import example from example
 import streamlit as st
 import datetime 
 import pandas as pd
@@ -126,3 +127,9 @@ try:
 except:
     pass
 
+
+try:
+    st.header("Macroeconomic Environment")
+    st.
+except:
+    pass

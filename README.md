@@ -9,6 +9,7 @@
     - risk_mgmt.py provides risk information on the portfolio
     - screener.py provides measured market data, and downloads it for later
     - sentiment_analysis.py provides a measured evaluation of the value of that daily market news
+    - macroeco.py will identify any macroeconomic changes of the global enviroment
     - spa.py will become a single page application to view information and to visualize data
 
 #### Setup CLI:
@@ -65,7 +66,10 @@ trustworthy ways to access brokrage accounts... Alas, it is on the TODO list.
 
 Further information will be provided. Stay tuned!
 
-It might be time ... {prompt}
+It might be time ... {prompt}  
+
+##### Citations:
+ - https://site.financialmodelingprep.com/developer/docs/
 
 ---
 ##### MIT License
