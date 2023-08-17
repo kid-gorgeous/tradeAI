@@ -63,6 +63,10 @@ try:
     bd = risk_analysis.getBenchmarkData(benchmark_symbol,start,end)
     arets, brets = risk_analysis.getReturns(hs,bd)
 
+
+    # TODO: Write a better table function that will display and provide detail definitions 
+    # for each metric upon request
+
     with st.expander("Risk Analysis"):
         # get the required values
         avg_ret         = risk_analysis.getAverageReturn(arets)
@@ -89,24 +93,26 @@ try:
             from {start_date} to {end_date}
 
 
-            | Metric | Value |
-            | ------ | ----- |
-            | Average Return | {avg_ret} |
-            | Standard Deviation | {stdev} |
-            | Sharpe Ratio | {shrp} |
-            | Sortino Ratio | {sortino} |
-            | Beta | {beta} |
-            | Alpha | {alpha} |
-            | Treynor Ratio | {tr} |
-            | Information Ratio | {ir} |
-            | Value at Risk | {var} |
-            | Conditional Value at Risk | {cvar} |
-            | R-Squared | {rs} |
-            | Correlation | {corr} |
-            | Volatility | {vol} |
-            | Skewness | {skew} |
-            | Kurtosis | {k} |
-            | Jarque-Bera | {jb} |
+            # | Metric | Value |
+            # | ------ | ----- |
+            # | Average Return | {avg_ret} |
+            # | Standard Deviation | {stdev} |
+            # | Sharpe Ratio | {shrp} |
+            # | Sortino Ratio | {sortino} |
+            # | Beta | {beta} |
+            # | Alpha | {alpha} |
+            # | Treynor Ratio | {tr} |
+            # | Information Ratio | {ir} |
+            # | Value at Risk | {var} |
+            # | Conditional Value at Risk | {cvar} |
+            # | R-Squared | {rs} |
+            # | Correlation | {corr} |
+            # | Volatility | {vol} |
+            # | Skewness | {skew} |
+            # | Kurtosis | {k} |
+            # | Jarque-Bera | {jb} |
+
+            
         """)
 except:
     pass
