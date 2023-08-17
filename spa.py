@@ -143,7 +143,7 @@ try:
     # st.table(unemp_df)
 
     st.write("### Unemployment Trends")
-    st.table(enump_df.tail(5))
+    st.table(unemp_df.tail(5))
 
     st.line_chart(unemp_df['Value'])
 except:
