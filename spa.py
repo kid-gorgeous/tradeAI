@@ -8,7 +8,7 @@
  """
 
 import yfinance as yf
-import example from example
+import macroeco
 import streamlit as st
 import datetime 
 import pandas as pd
@@ -41,6 +41,7 @@ end = pd.to_datetime(end_date)
 
 # Read data 
 data = yf.download(symbol,start,end)
+
 data['SMA'] = ta.sma(data['Adj Close'], timeperiod = 20)
 data['EMA'] = ta.ema(data['Adj Close'], timeperiod = 20)
 
@@ -130,6 +131,12 @@ except:
 
 try:
     st.header("Macroeconomic Environment")
-    st.
+
+    me = macroeco.MacroEco(start_date, end_date)
+    oil_df = me.getCrudeOilTrends()
+    unemp_df = me.getUnemploymentTrends()
+
+    st.table(oil_df.tail(5))
+    # st.table(unemp_df)
 except:
     pass
