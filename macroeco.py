@@ -23,7 +23,7 @@ import matplotlib.pyplot as plt
 from matplotlib.pyplot import figure
 import datetime
 
-import config as cf
+# import config as cf
 
 
 # # Crude Oil Data frame
