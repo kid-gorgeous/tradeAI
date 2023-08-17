@@ -9,6 +9,7 @@ evaluate
 yfinance
 requests
 urllib3
+fredapi
 quandl
 pandas
 openai

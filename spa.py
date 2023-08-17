@@ -138,10 +138,13 @@ try:
 
     st.write("### Crude Oil Trends")
     st.table(oil_df.tail(5))
+
     st.line_chart(oil_df['Value'])
     # st.table(unemp_df)
 
     st.write("### Unemployment Trends")
     st.table(enump_df.tail(5))
+
+    st.line_chart(unemp_df['Value'])
 except:
     pass

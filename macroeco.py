@@ -36,12 +36,16 @@ import config as cf
 
 class MacroEco:
     def __init__(self, start_time, end_time):
-        self.api_key = cf.quandl_api
+        self.api_key = 'HMsNFYjwQumm3zSQPn9D'
         self.start_time = start_time
         self.end_time = end_time
 
         quandl.ApiConfig.api_key = self.api_key
         
+    def getGDP(self):
+
+
+        pass
 
     def getCrudeOilTrends(self):
         try:
@@ -58,4 +62,13 @@ class MacroEco:
         return unemployment_df
 
 
-        
+m = MacroEco("2000-12-31", "2020-04-20")
+
+oil_df = m.getCrudeOilTrends()
+ 
+# plt.plot(oil_df)
+
+
+class FREDAPI:
+    def __init__(self, api_key):
+        self.api_key = api_key  
