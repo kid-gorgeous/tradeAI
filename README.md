@@ -66,7 +66,15 @@ trustworthy ways to access brokrage accounts... Alas, it is on the TODO list.
 
 Further information will be provided. Stay tuned!
 
-It might be time ... {prompt}  
+It might be time ... {prompt}, 
+
+##### Push to the Press: August 18th, 2023
+Okay so update... we're working on the prompt DataType... It will work soon enough.
+Anyways, we're out here adding a Longterm Shortterm Memory "system" to this mess. I'm tired of thinking about this Economy Drama so I'm just going to let the computer handle it, ya dig? So, that's what this next update will be about. I'll put a number to it, and read up on what an 'Alpha' is and add a version number to everythin'.
+
+Btw, this will not make you ***rich*** but maybe it'll make you *wealthy*
+
+
 
 ##### Citations:
  - https://site.financialmodelingprep.com/developer/docs/
