@@ -5,6 +5,8 @@
 
     TODO: to fix this module, the symbol pages from the symbols directory will be used
     to populate the dropdown menu, graphs, charts, etc.
+
+    TODO: at some point add a real exception handler to the code... lol
  """
 
 import yfinance as yf
@@ -69,8 +71,11 @@ try:
 
     with st.expander("Risk Analysis"):
         # get the required values
+        # The average return of the stock
         avg_ret         = risk_analysis.getAverageReturn(arets)
+        # The standard deviation of the stock
         stdev           = risk_analysis.getStandardDeviation(arets)
+        # The sharpe ratio of the stock is a measure of an investment's risk adjusted performance, calculated by comparing its return to that of a risk-free asset
         shrp            = risk_analysis.getSharpeRatio(avg_ret, stdev)
         drets           = risk_analysis.getDownsideReturns(arets)
         sortino         = risk_analysis.getSortinoRatio(arets, avg_ret, drets, risk_free_rate=0.03)
@@ -88,39 +93,64 @@ try:
         k               = risk_analysis.getKurtosis(arets)
         jb              = risk_analysis.getJarqueBera(arets)
 
-        st.write(f"""
-        #### Data for the stock {company_name} 
-            from {start_date} to {end_date}
+        with st.container():
+            st.text(f"Average Return: {avg_ret}.")
+            st.text(f"Standard Deviation: {stdev}")
+            st.text(f"Sharpe Ratio: {shrp}")
+            st.text(f"Sortino Ratio: {sortino}")
+            st.text(f"Beta: {beta}")
+            st.text(f"Alpha: {alpha}")
+            st.text(f"Treynor Ratio: {tr}")
+            st.text(f"Information Ratio: {ir}")
+            st.text(f"Value at Risk: {var}")
+            st.text(f"Conditional Value at Risk: {cvar}")
+            st.text(f"R-Squared: {rs}")
+            st.text(f"Correlation: {corr}")
+            st.text(f"Volatility: {vol}")
+            st.text(f"Skewness: {skew}")
+            st.text(f"Kurtosis: {k}")
+            st.text(f"Jarque-Bera: {jb}")
 
 
-            # | Metric | Value |
-            # | ------ | ----- |
-            # | Average Return | {avg_ret} |
-            # | Standard Deviation | {stdev} |
-            # | Sharpe Ratio | {shrp} |
-            # | Sortino Ratio | {sortino} |
-            # | Beta | {beta} |
-            # | Alpha | {alpha} |
-            # | Treynor Ratio | {tr} |
-            # | Information Ratio | {ir} |
-            # | Value at Risk | {var} |
-            # | Conditional Value at Risk | {cvar} |
-            # | R-Squared | {rs} |
-            # | Correlation | {corr} |
-            # | Volatility | {vol} |
-            # | Skewness | {skew} |
-            # | Kurtosis | {k} |
-            # | Jarque-Bera | {jb} |
-
-            
-        """)
+        # st.write(f"""
+        # #### Data for the stock {company_name} 
+        #     from {start_date} to {end_date}
+        #     # | Metric | Value |
+        #     # | ------ | ----- |
+        #     # | Average Return | {avg_ret} |
+        #     # | Standard Deviation | {stdev} |
+        #     # | Sharpe Ratio | {shrp} |
+        #     # | Sortino Ratio | {sortino} |
+        #     # | Beta | {beta} |
+        #     # | Alpha | {alpha} |
+        #     # | Treynor Ratio | {tr} |
+        #     # | Information Ratio | {ir} |
+        #     # | Value at Risk | {var} |
+        #     # | Conditional Value at Risk | {cvar} |
+        #     # | R-Squared | {rs} |
+        #     # | Correlation | {corr} |
+        #     # | Volatility | {vol} |
+        #     # | Skewness | {skew} |
+        #     # | Kurtosis | {k} |
+        #     # | Jarque-Bera | {jb} |
+        # """)
 except:
     pass
 
 try: 
+
+    # TODO: Write a function that will allow for the user to click URLS, read specific 
+    # sentiment artifacts include key words, phrases, and important symbols that can be 
+    # identified with Machine Learning.
     news = News(symbol,tickers=[symbol])
+
     news = news.getNews()
     st.header(f"News for {company_name}")
+
+    for i in range(len(news)):
+        print(news[i]['URL'])
+        
+
     st.table(news)
 except:
     pass
@@ -144,9 +174,7 @@ try:
 
     st.write("### Crude Oil Trends")
     st.table(oil_df.tail(5))
-
     st.line_chart(oil_df['Value'])
-    # st.table(unemp_df)
 
     st.write("### Unemployment Trends")
     st.table(unemp_df.tail(5))

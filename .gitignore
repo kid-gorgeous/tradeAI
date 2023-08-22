@@ -3,6 +3,7 @@
 /database.db
 # /config.py
 # /macroeco.py
+/test_ltn.py
 /test.py
 /attn.py
 /api.py
