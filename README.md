@@ -74,6 +74,10 @@ Anyways, we're out here adding a Longterm Shortterm Memory "system" to this mess
 
 Btw, this will not make you ***rich*** but maybe it'll make you *wealthy*
 
+#### On the grill: August 29th, 2023
+Back again, and of course not much has been accomplished. I'm focusing on optimizing the machine learning features that are implemented and the future tendencies that I would like to incorporate into the over all functionality of this application. I'm imagining a way to communicate with a finetuned financial model. I'm hoping to learning more about financing as a whole throughout lifecycle of my application. I'm attending school again and finishing up my senior year of college but I intend to try and add new features weekly or bi-weekly. We'll see. 
+
+> Off to school.
 
 
 ##### Citations:
