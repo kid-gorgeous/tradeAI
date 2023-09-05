@@ -91,8 +91,9 @@ class Screener:
     
     def fetchMultipleReturnData(self, index_return=''):
         for ticker in self.symbols:
-            df = pd.read_csv(f'./symbols/{ticker}.csv')
+            
             try:
+                df = pd.read_csv(f'./symbols/{ticker}.csv')
                 pct_change = df['Adj Close'].pct_change()
                 df['Percent Change'] = pct_change
                 try:
