@@ -170,6 +170,12 @@ def printInfo(sym,avg_ret,stdev,shrp,srt,beta,alpha,treynor,info,var,cvar,r_squa
     print("Kurtosis: {}".format(kurtosis))
     print("Jarque Bera: {}".format(jarque_bera))
 
+# def help():
+#     print(""" 
+    
+#     """)
+#     pass
+
 def main():
 
     # define the requirements 
