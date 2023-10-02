@@ -79,6 +79,34 @@ Back again, and of course not much has been accomplished. I'm focusing on optimi
 
 > Off to school.
 
+#### From the otherside of the looking glass, October 2nd, 2023
+After taking a step back, I've planned to structurize this application. It features capabilities that I have lost sight off. I am refocusing 
+development on functionality and learning potential. The chat features are okay, but they are not bounded by the intelligent databases that provide
+resources for scripts, and utilities. I would like to feature my own regression models and a model handler that will allow me to change or tweek the
+learning abilites of a machine learning algorithm. 
+
+##### Sidebar update: I started a new project. It's being graded at school.
+So basically, I'm watching you. If you cheat, we know. If you submit a paper that's plagerized.. We'll know. 
+... If you forgot to brush your teeth, they'll jknow. 
+
+This project is not of your attention....... But, you'll have ours. This team based project is a anti-cheat software.
+It will feature: 
+    - Facial Recognition
+    - Patterned Behavioral Modelling
+    - Timers and Sensors
+    - Bells and Whistles
+    - A client based server streaming service
+
+But, I gotta ask the rest of the team how ambition they are feeling. I want office space, but we'll see.
+
+
+#### Directory Tree:
+- env
+- utils
+    - federal reserve ap
+    - openapi (for chat capabilities)
+- scripts
+- misc. files
 
 ##### Citations:
  - https://site.financialmodelingprep.com/developer/docs/
