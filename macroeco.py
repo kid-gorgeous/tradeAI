@@ -69,6 +69,6 @@ oil_df = m.getCrudeOilTrends()
 # plt.plot(oil_df)
 
 
-class FREDAPI:
-    def __init__(self, api_key):
-        self.api_key = api_key  
+# class FREDAPI:
+#     def __init__(self, api_key):
+#         self.api_key = api_key  
